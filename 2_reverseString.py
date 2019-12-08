@@ -1,5 +1,21 @@
 class Solution(object):
-    def reverseString(self, s):
+    #Using Recursive Method
+	def reverseString(self,s): 
+		        """
+        :type s: List[str]
+        :rtype: None Do not return anything, modify s in-place instead.
+        """
+		def helper(right,left):
+			if left > right:
+				s[right],s[left]=s[left],s[right]
+				right=right+1
+				left=left-1
+				helper(right,left)
+		helper(0,len(s)-1)
+		return s
+
+	#more efficent
+    def reverseString1(self, s):
         """
         :type s: List[str]
         :rtype: None Do not return anything, modify s in-place instead.
