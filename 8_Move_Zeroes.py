@@ -11,7 +11,18 @@ class Solution(object):
                 nums.append(rm)
                 k+=1
         return nums
-
+    # Different Approach: both yields same time and memory
+    def moveZeroes1(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: None Do not return anything, modify nums in-place instead.
+        """
+        non_zero_index=0
+        for i in range(0,len(nums)):
+            if nums[i]!=0:
+                nums[non_zero_index],nums[i]=nums[i],nums[non_zero_index]
+                non_zero_index+=1
+        return nums
 
 
 
