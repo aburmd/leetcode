@@ -25,33 +25,19 @@ Output: 0
 Explanation: In this case, no transaction is done, i.e. max profit = 0.
 """
 
-
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        isbuy=False
-        buyPrice=0
-        sellPrice=0
         profit=0
-        if len(prices) in [0,1]:
-            return 0
-        elif prices[0]<=prices[1]:
-            isbuy=True
-            buyPrice=prices[0]
-        for i in range(1,len(prices)-1):  
-            if (prices[i-1]<=prices[i]) and (prices[i+1]<=prices[i]) and (isbuy):
-                isbuy=False
-                sellPrice=prices[i]
-                profit+=(sellPrice-buyPrice)
-            elif (prices[i-1]>=prices[i]) and (prices[i+1]>=prices[i]) and (not isbuy):
-                isbuy=True
-                buyPrice=prices[i]
-        if prices[len(prices)-2]<=prices[len(prices)-1] and (isbuy):
-            isbuy=False
-            sellPrice=prices[len(prices)-1]
-            profit+=(sellPrice-buyPrice)
+        for i in range(1,len(prices)):
+            if prices[i]>prices[i-1]:
+                profit+=prices[i]-prices[i-1]
         return profit
 
 """
+Runtime: 68 ms, faster than 67.42% of Python3 online submissions for Best Time to Buy and Sell Stock II.
+Memory Usage: 13.9 MB, less than 60.98% of Python3 online submissions for Best Time to Buy and Sell Stock II.
+Previous Commits details:
 Runtime: 64 ms, faster than 80.83% of Python3 online submissions for Best Time to Buy and Sell Stock II.
 Memory Usage: 13.8 MB, less than 82.93% of Python3 online submissions for Best Time to Buy and Sell Stock II.
 """
+
