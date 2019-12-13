@@ -22,20 +22,16 @@ Input: [-24500,-24499,-24498,-24497,-24496,-24495,-24494,-24493,-24492,-24491,-2
 Output: false
 """
 
-class Solution(object):
-    def containsDuplicate(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: bool
-        """
-        if not nums or (len(nums)==1):
-            return False
-        nums.sort()
-        firstElement=nums.pop(0)
-        for i in nums:
-            if firstElement!=i:
-                firstElement=i
-            else:
-                return True
-        return False
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        return len(set(nums))!=len(nums)
 
+"""
+Runtime: 132 ms, faster than 79.02% of Python3 online submissions for Contains Duplicate.
+Memory Usage: 18.1 MB, less than 88.68% of Python3 online submissions for Contains Duplicate.
+
+Previous Commit:
+Runtime: 100 ms, faster than 90.71% of Python online submissions for Contains Duplicate.
+Memory Usage: 15.6 MB, less than 96.30% of Python online submissions for Contains Duplicate.
+
+"""
