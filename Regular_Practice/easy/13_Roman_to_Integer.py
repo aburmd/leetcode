@@ -43,23 +43,24 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 """
 
 
-class Solution(object):
-    def romanToInt(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        normal={'I':1,'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}
-        reverse=s[::-1]
-        x=0
-        for i in range(0,len(reverse)):
-            if i==0:
-                x+=normal[reverse[i]]
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        symbol={'I':1,'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}
+        preval=0
+        result=0
+        for i in s[::-1]:
+            if preval>symbol[i]:
+                result-=symbol[i]
+                preval=symbol[i]
             else:
-                if normal[reverse[i-1]]>normal[reverse[i]]:
-                    x-=normal[reverse[i]]
-                else:
-                    x+=normal[reverse[i]]
-        return x
+                result+=symbol[i]
+                preval=symbol[i]
+        return result
+
+"""
+Second Commit:
+Runtime: 44 ms, faster than 87.93% of Python3 online submissions for Roman to Integer.
+Memory Usage: 12.8 MB, less than 100.00% of Python3 online submissions for Roman to Integer.
+"""
 
 

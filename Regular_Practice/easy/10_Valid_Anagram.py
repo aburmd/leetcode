@@ -16,27 +16,27 @@ What if the inputs contain unicode characters? How would you adapt your solution
 """
 
 
-class Solution(object):
-    def isAnagram(self, s, t):
-        """
-        :type s: str
-        :type t: str
-        :rtype: bool
-        """
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
         if len(s)!=len(t):
             return False
-        dict_s={}
-        dict_t={}
-        for i in s:
-            if i not in dict_s:
-                dict_s[i]=1
+        dct={}
+        for value in s:
+            if value not in dct.keys():
+                dct[value]=1
             else:
-                dict_s[i]+=1
-        for j in t:
-            if j not in dict_s.keys():
-                return False
-            else:
-                dict_s[j]-=1
-                if dict_s[j]==-1:
+                dct[value]+=1
+        for value in t:
+            if value in dct.keys():
+                dct[value]-=1
+                if dct[value]<0:
                     return False
+            else:
+                return False
         return True
+
+"""
+Second Commit:
+Runtime: 60 ms, faster than 44.10% of Python3 online submissions for Valid Anagram.
+Memory Usage: 13.1 MB, less than 96.88% of Python3 online submissions for Valid Anagram.
+"""

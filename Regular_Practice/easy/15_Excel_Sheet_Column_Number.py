@@ -25,40 +25,42 @@ Output: 701
 """
 
 class Solution:
-    def powof26(self,n):
-        storeValue={}
-        if n==0:
+    def pow(self,multiple,power):
+        storeval={}
+        if power==0:
             return 1
-        elif n==1:
-            return 26
+        if power==1:
+            return multiple
         else:
-            if n not in storeValue.keys():
-                storeValue[n]=26*self.powof26(n-1)
-                return storeValue[n]
+            if power not in storeval.keys():
+                storeval[str(multiple)+'-'+str(power)]=multiple*self.pow(multiple,power-1)
+                return storeval[str(multiple)+'-'+str(power)]
             else:
-                return storeValue[n]
-            
-        
+                return storeval[str(multiple)+'-'+str(power)]
+
+
     def titleToNumber(self, s: str) -> int:
-        multiplier=0
-        power=-1
-        columnNumber=0
-        aplha='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-        dct={}
-        for key,value in enumerate(aplha):
-            dct[value]=key+1
+        alphaDct={}
+        alpha='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        counter=0
+        result=0
+        for key,value in enumerate(alpha):
+            alphaDct[value]=key+1
         for i in s[::-1]:
-            power+=1
-            multiplier=dct[i]
-            columnNumber+=multiplier*self.powof26(power)
-        return columnNumber
+            result+=alphaDct[i]*self.pow(26,counter)
+            counter+=1
+        return result
 
 """
+Third Commit:
+Runtime: 32 ms, faster than 80.27% of Python3 online submissions for Excel Sheet Column Number.
+Memory Usage: 12.8 MB, less than 100.00% of Python3 online submissions for Excel Sheet Column Number.
+
+Second Commit:
 Runtime: 28 ms, faster than 92.06% of Python3 online submissions for Excel Sheet Column Number.
 Memory Usage: 12.7 MB, less than 100.00% of Python3 online submissions for Excel Sheet Column Number.
 
-Previous Commit:
+Fisrt Commit:
 Runtime: 32 ms, faster than 80.96% of Python3 online submissions for Excel Sheet Column Number.
 Memory Usage: 12.7 MB, less than 100.00% of Python3 online submissions for Excel Sheet Column Number.
-
 """

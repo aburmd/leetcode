@@ -43,3 +43,9 @@ class Solution(object):
         node.val=node.next.val #since, there is no reference for the previous node.we can't modify the pointer of previous node.
         #Instead, we can copy the value of next node and paste it to the current node(act as next node now) and delete the next node
         node.next=node.next.next
+
+
+"""
+Runtime: 24 ms, faster than 99.81% of Python3 online submissions for Delete Node in a Linked List.
+Memory Usage: 13 MB, less than 100.00% of Python3 online submissions for Delete Node in a Linked List.
+"""
