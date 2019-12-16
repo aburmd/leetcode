@@ -20,15 +20,14 @@ class Solution:
         return a
 
     def getNegativeIntegerSum(self,a,b):
-        upperbound=0xfffffffff
+        upperbound=0xfffffffff #define the max value for calculation
         upperbound_plus1=self.getPositiveIntegerSum(upperbound,1)
-        b=b&0xfffffffff
+        b=b&0xfffffffff #boundary define for negative number and negative number starts in reverse order like (-1&0xf->15,-1&0xff->255) here -1&0xfffffffff = -1=68719476735)
         a=self.getPositiveIntegerSum(a,b)
-        if a>=upperbound:
+        if a>=upperbound: # above upperbound value can be controlled using mod function
             return -1 if a%upperbound==0 else a%upperbound_plus1
         else:
-            print("2",a,upperbound_plus1)
-            return -1*((-1*(a%upperbound))&0xfffffffff)
+            return -1*((-1*(a%upperbound))&0xfffffffff) # below upperbound value can be controlled by make negative define upperbound and multiply by -1
 
     def getSum(self,a, b):
         if a==-b:
