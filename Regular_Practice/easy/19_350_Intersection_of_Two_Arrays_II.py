@@ -22,27 +22,35 @@ What if elements of nums2 are stored on disk, and the memory is limited such tha
 
 class Solution:
     def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        if (not nums1) or (not nums2):
+        if not nums1 or not nums2:
             return None
-        nums1.sort()
-        nums2.sort()
-        z=[]
-        if len(nums1) >= len(nums2):
-            for i in nums2:
-                if i in nums1:
-                    z.append(i)
-                    nums1.remove(i)
+        dt1={}
+        dt2={}
+        preres=[]
+        for i in nums1:
+            if i not in dt1.keys():
+                dt1[i]=1
+            else:
+                dt1[i]+=1
+        for j in nums2:
+            if j not in dt2.keys():
+                dt2[j]=1
+            else:
+                dt2[j]+=1
+        if len(dt1)>=len(dt2):
+            for k in dt2.keys():
+                if k in dt1.keys():
+                    preres += [k]*min(dt1[k],dt2[k])
         else:
-            for i in nums1:
-                if i in nums2:
-                    z.append(i)
-                    nums2.remove(i)
-        return z
+            for k in dt1.keys():
+                if k in dt2.keys():
+                    preres += [k]*min(dt1[k],dt2[k])
+        return preres
+
 
 
 """
-First Commit:
-Runtime: 64 ms, faster than 24.79% of Python3 online submissions for Intersection of Two Arrays II.
+Second Commit:
+Runtime: 48 ms, faster than 80.18% of Python3 online submissions for Intersection of Two Arrays II.
 Memory Usage: 12.8 MB, less than 100.00% of Python3 online submissions for Intersection of Two Arrays II.
 """
-
