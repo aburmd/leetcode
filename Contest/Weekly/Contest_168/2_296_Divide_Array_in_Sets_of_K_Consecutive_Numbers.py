@@ -34,62 +34,31 @@ Constraints:
 1 <= k <= nums.length
 """
 
+import collections
 class Solution:
     def isPossibleDivide(self, nums: List[int], k: int) -> bool:
-        print ('givenArray',nums)
-        totLength=len(nums)
-        if totLength%k!=0:
-            return False
-        nums.sort()
-        print ('givenArraysorted',nums)
-        noOfinnerarray=totLength//k
-        print ('noOfelementsininnerarray',k)
-        print ('noOfinnerarray',noOfinnerarray)
-        outerArray=[]
-        x=0
-        newLength=totLength
-        for i in range(0,noOfinnerarray):
-            x=0
-            outerArray.append([])
-            for innerArrayelements in range(0,totLength):
-                print('Index',x)
-                print('Array Element',nums[x])
-                if newLength>x+1:
-                    if nums[x]!=nums[x+1]:
-                        print('Inside Array Index',x)
-                        print('Inside Array Element',nums[x])
-                        outerArray[i].append(nums[x])
-                        nums.pop(x)
-                        newLength-=1
-                        print('newLength',newLength)
-                        print(outerArray[i])
-                    else:
-                        x+=1
-                else:
-                    x=-1
-                    print('Inside Array Index',x)
-                    print('Inside Array Element',nums[x])
-                    outerArray[i].append(nums[-1])
-                    nums.pop(-1)
-                    newLength-=1
-                    print('newLength',newLength)
-                    print(outerArray[i])
-                if len(outerArray[i])==k:
-                    for j in range(0,k-1):
-                        if outerArray[i][j]+1!=outerArray[i][j+1]:
-                            return False
-                    break
-        print ('outerArray',outerArray)
-        if newLength!=0:
-            return False
-        else:
-            for arr in outerArray:
-                for i in range(0,len(arr)-1):
-                    if arr[i]+1!=arr[i+1]:
+        c=collections.Counter(nums)
+        #print(c)
+        #x=0
+        for key in sorted(c):
+            #x+=1
+            #print('Intial key/value pair',key,c[key])
+            while c[key]:
+                #y=0
+                for key1 in range(key,key+k): #k-->no_of_elements in an array
+                    #y+=1
+                    #print('After {} interation of {} elements key/value pair:{},{}'.format(x,y,key1,c[key1]))
+                    if not c[key1]:
                         return False
-            return True
+                    c[key1]-=1
+                    #print('After {} interation of {} elements key/value pair with minus one reduction in value:{},{}'.format(x,y,key1,c[key1]))
+        return True
 
 """
-Not a Optimized solution
+Second Commit: 
+Runtime: 452 ms, faster than 75.34% of Python3 online submissions for Divide Array in Sets of K Consecutive Numbers.
+Memory Usage: 27.3 MB, less than 100.00% of Python3 online submissions for Divide Array in Sets of K Consecutive Numbers.
+
+Addtional Points: Time to learn about collections and containers in python
 """
 
