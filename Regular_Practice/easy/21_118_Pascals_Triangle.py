@@ -20,32 +20,38 @@ Output:
 class Solution:
     def __init__(self):
         self.dct={}
+    def lastElement(self, numRows):
+        if numRows in self.dct.keys():
+            return self.dct[numRows]
+        else:
+            if numRows==1:
+                self.dct[numRows]=[1]
+            elif numRows==2:
+                self.dct[numRows]=[1,1]
+            else:
+                last=self.lastElement(numRows-1)
+                x=[]
+                for i in range(0,numRows):
+                    if i==0 or i==numRows-1:
+                        x.append(1)
+                    else:
+                        x.append(last[i-1]+last[i])
+                self.dct[numRows]=x
+            return self.dct[numRows]
     def generate(self, numRows: int) -> List[List[int]]:
         if numRows==0:
             return None
-        if numRows==1:
-            self.dct[numRows]=[[1]]
-            return self.dct[numRows]
         else:
-            if numRows not in self.dct.keys():
-                outerArray=[]
-                for i in self.generate(numRows-1):
-                    outerArray.append(i)
-                innerArray=[]
-                lastElement=outerArray[-1]
-                for i in range(0,numRows):
-                    if i==0 or i==(numRows-1):
-                        innerArray.append(1)
-                    else:
-                        innerArray.append(lastElement[i-1]+lastElement[i])
-                outerArray.append(innerArray)
-                self.dct[numRows]=outerArray
-                return self.dct[numRows]
-            else:
-                return self.dct[numRows]
+            outerArray=[]
+            for i in range(1,numRows+1):
+                outerArray.append(self.lastElement(i))
+            return outerArray
 
 
 """
+SecondCommit:
+Runtime: 24 ms, faster than 94.10% of Python3 online submissions for Pascal's Triangle.
+Memory Usage: 12.8 MB, less than 100.00% of Python3 online submissions for Pascal's Triangle.
 FirstCommit:
 Runtime: 28 ms, faster than 83.98% of Python3 online submissions for Pascal's Triangle.
 Memory Usage: 12.8 MB, less than 100.00% of Python3 online submissions for Pascal's Triangle.
