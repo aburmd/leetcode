@@ -20,36 +20,24 @@ What if nums1's size is small compared to nums2's size? Which algorithm is bette
 What if elements of nums2 are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?
 """
 
+import collections
 class Solution:
     def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        if not nums1 or not nums2:
-            return None
-        dt1={}
-        dt2={}
-        preres=[]
-        for i in nums1:
-            if i not in dt1.keys():
-                dt1[i]=1
-            else:
-                dt1[i]+=1
-        for j in nums2:
-            if j not in dt2.keys():
-                dt2[j]=1
-            else:
-                dt2[j]+=1
-        if len(dt1)>=len(dt2):
-            for k in dt2.keys():
-                if k in dt1.keys():
-                    preres += [k]*min(dt1[k],dt2[k])
-        else:
-            for k in dt1.keys():
-                if k in dt2.keys():
-                    preres += [k]*min(dt1[k],dt2[k])
-        return preres
+        c1=collections.Counter(nums1)
+        c2=collections.Counter(nums2)
+        res=[]
+        common=c1&c2
+        for i in common:
+            res+=[i]*common[i]
+        return res
 
 
 
 """
+Third Commit: Please refer the previous commit on this file for regular approach
+Runtime: 44 ms, faster than 90.97% of Python3 online submissions for Intersection of Two Arrays II.
+Memory Usage: 12.7 MB, less than 100.00% of Python3 online submissions for Intersection of Two Arrays II.
+
 Second Commit:
 Runtime: 48 ms, faster than 80.18% of Python3 online submissions for Intersection of Two Arrays II.
 Memory Usage: 12.8 MB, less than 100.00% of Python3 online submissions for Intersection of Two Arrays II.
