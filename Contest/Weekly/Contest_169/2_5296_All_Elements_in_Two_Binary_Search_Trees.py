@@ -41,71 +41,24 @@ Each node's value is between [-10^5, 10^5].
 #         self.left = None
 #         self.right = None
 
-class LinkedNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-
 class Solution:
-    def __init__(self):
-        self.cur1Node=None
-        self.cur2Node=None
-    def traverse1(self,root1):
-        if root1:
-            return self.traverseinOrder1(root1)
-    def traverseinOrder1(self,root1):
-        if root1.right:
-            self.traverseinOrder1(root1.right)
-        if self.cur1Node:
-            preNode=self.cur1Node
-            self.cur1Node=LinkedNode(root1.val)
-            self.cur1Node.next=preNode
-        else:
-            self.cur1Node=LinkedNode(root1.val)
-        if root1.left:
-            self.traverseinOrder1(root1.left)
-    def traverse2(self,root2):
-        if root2:
-            return self.traverseinOrder2(root2)
-    def traverseinOrder2(self,root2):
-        if root2.right:
-            self.traverseinOrder2(root2.right)
-        if self.cur2Node:
-            preNode=self.cur2Node
-            self.cur2Node=LinkedNode(root2.val)
-            self.cur2Node.next=preNode
-        else:
-            self.cur2Node=LinkedNode(root2.val)
-        if root2.left:
-            self.traverseinOrder2(root2.left)
-    def mergeTwoLists(self,l1,l2):
-        if not l1:
-            return l2
-        elif not l2:
-            return l1
-        elif l1.val > l2.val:
-            firstNode=l2
-            if l1 or l2.next:
-                firstNode.next=self.mergeTwoLists(l1,l2.next)
-            return firstNode
-        else:
-            firstNode=l1
-            if l2 or l1.next:
-                firstNode.next=self.mergeTwoLists(l2,l1.next)
-            return firstNode
     def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
-        self.traverse1(root1)
-        self.traverse2(root2)
-        x=self.mergeTwoLists(self.cur1Node,self.cur2Node)
-        y=[]
-        while x:
-            y.append(x.val)
-            x=x.next
-        return y
+        a=[]
+        def dfs(node):
+            if node:
+                dfs(node.left)
+                a.append(node.val)
+                dfs(node.right)
+        dfs(root1)
+        dfs(root2)
+        a.sort()
+        return a
 
 
 """
+Second Commit: 
+Simple but powerful solution.
+
 First Commit:
 Contest: Completed within that timeframe. Solution provides a correct output, but, lengthy approach.
 BST --> sorted linked list (1 & 2) --> Sorted Array
