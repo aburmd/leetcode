@@ -16,28 +16,28 @@ Explanation:
 
 class Solution:
     def isHappy(self, n: int) -> bool:
-        pw={0:0,1:1,2:4,3:9,4:16,5:25,6:36,7:49,8:64,9:81}
-        arr=[]
-        while 1!=2:
-            isHappy=0
-            res=''
-            pre=sorted(str(n),reverse=False)
-            for j in pre:
-                if j!='0':
-                    res+=j
-            if res not in arr:
-                arr.append(res)
-            else:
-                arr.append(res)
+        def squaresum(n):
+            pw={0:0,1:1,2:4,3:9,4:16,5:25,6:36,7:49,8:64,9:81}
+            res=0
+            while n:
+                res+=pw[n%10] #Great idea, for digit manipulation always use (mod10 with while) instead of string conversion with loops
+                n=n//10
+            return res
+        s=[]
+        while squaresum(n)!=1:
+            if n in s:
                 return False
-            for i in res:
-                isHappy+=int(pw[int(i)])
-            if isHappy==1:
-                return True
-            n=isHappy
+            else:
+                s.append(n)
+                n=squaresum(n)
+            #print(s)
+        return True
 
 
 """
+SecondCommit: Much better and clean approach (readable)
+Runtime: 52 ms, faster than 8.03% of Python3 online submissions for Happy Number.
+Memory Usage: 12.8 MB, less than 100.00% of Python3 online submissions for Happy Number.
 FirstCommit: 
 Runtime: 32 ms, faster than 81.46% of Python3 online submissions for Happy Number.
 Memory Usage: 12.9 MB, less than 100.00% of Python3 online submissions for Happy Number.
