@@ -37,36 +37,19 @@ s will be valid string such that mapping is always possible.
 
 class Solution:
     def freqAlphabets(self, s: str) -> str:
-        alpha='0abcdefghijklmnopqrstuvwxyz'
-        res=''
-        dct={}
-        x=0
-        for i,j in enumerate(alpha):
-            if i>9:
-                dct[str(i)+'#']=j
+        i=0
+        ans=[]
+        while i < len(s):
+            if i+2 < len(s) and s[i+2]=='#':
+                code=int(s[i:i+2])
+                ans.append(chr(code+ord('a')-1))
+                i+=3
             else:
-                dct[str(i)]=j
-        arrseq=[]
-        for i in range(0,len(s)):
-            if s[i]=='#':
-                #print('1',arrseq[-1])
-                arrseq.pop()
-                #print(arrseq)
-                #print('2',arrseq[-1])
-                arrseq.pop()
-                #print(arrseq)
-                #print('3',s[i-2:i+1])
-                #print('4',dct[s[i-2:i+1]])
-                arrseq.append(dct[s[i-2:i+1]])
-                #print(arrseq)
-            else:
-                #print('5',dct[s[i]])
-                arrseq.append(dct[s[i]])
-                #print(arrseq)
-        for i in arrseq:
-            res+=i
-        return res
-
+                code=int(s[i])
+                ans.append(chr(code+ord('a')-1))
+                i+=1
+        return "".join(ans)
 """
+Second Commit: Learn from Experts about ord and chr function and implement the solutions. Beats 72.41% speed.
 First Commit: Solution completed. But, it can be groomed further.
 """
