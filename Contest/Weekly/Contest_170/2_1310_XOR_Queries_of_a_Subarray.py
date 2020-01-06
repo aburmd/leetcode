@@ -40,23 +40,17 @@ Another Testcase:
 
 class Solution:
     def xorQueries(self, arr, queries):
-        x=[]
-        y=-1
-        for a,b in queries:
-            y+=1
-            if (a,b) not in dct.keys():
-
-            x.append('x')
-            for j in arr[a:(b+1)]:
-                if x[y]=='x':
-                    x[y]=j
-                    #print('1',x[y])
-                else:
-                    x[y]=x[y]^j
-                    #print('2',x[y])
-        return x
+        p=[0]
+        for i in arr:
+            p.append(p[-1]^i)
+        def solve(val):
+            left,right=val
+            return p[right+1]^p[left]
+        return list(map(solve,queries))
 
 """
+Second Commit: Learn from experts. Idea behind this is, want c^d^e = (a^b^c^d^e)^(a^b)=(a^a)^(b^b)^(c^d^e)=0^0^(c^d^e)=c^d^e.
+               Beat 64.96% speed
 First Commit: Workable solution but, time exceeded. Needs to be optimized
 
 """
