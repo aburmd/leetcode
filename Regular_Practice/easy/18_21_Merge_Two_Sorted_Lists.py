@@ -17,24 +17,25 @@ Output: 1->1->2->3->4->4
 #         self.next = None
 
 class Solution:
-    def mergeTwoLists(self,l1,l2):
-        if not l1:
-            return l2
-        elif not l2:
-            return l1
-        elif l1.val > l2.val:
-            firstNode=l2
-            if l1 or l2.next:
-                firstNode.next=self.mergeTwoLists(l1,l2.next)
-            return firstNode
+    def mergeTwoLists(self,L1,L2):
+        if not L1:
+            return L2
+        elif not L2:
+            return L1
         else:
-            firstNode=l1
-            if l2 or l1.next:
-                firstNode.next=self.mergeTwoLists(l2,l1.next)
-            return firstNode
+            if L1.val > L2.val:
+                L2.next=self.mergeTwoLists(L2.next,L1)
+                return L2
+            else:
+                L1.next=self.mergeTwoLists(L1.next,L2)
+                return L1
 
 
 """
+Second Commit: Nothing much different than previous.But, looks cleaner and easy to read
+Runtime: 32 ms, faster than 80.81% of Python3 online submissions for Merge Two Sorted Lists.
+Memory Usage: 12.8 MB, less than 100.00% of Python3 online submissions for Merge Two Sorted Lists.
+
 First Commit:
 Runtime: 28 ms, faster than 97.91% of Python3 online submissions for Merge Two Sorted Lists.
 Memory Usage: 12.6 MB, less than 100.00% of Python3 online submissions for Merge Two Sorted Lists.
