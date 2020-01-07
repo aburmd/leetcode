@@ -18,34 +18,15 @@ Output: ["h","a","n","n","a","H"]
 
 
 
-class Solution(object):
-    #Using Recursive Method
-    def reverseString(self,s): 
-                """
-        :type s: List[str]
-        :rtype: None Do not return anything, modify s in-place instead.
-        """
-        def helper(right,left):
-            if left > right:
-                s[right],s[left]=s[left],s[right]
-                right=right+1
-                left=left-1
-                helper(right,left)
-        helper(0,len(s)-1)
+class Solution:
+    def reverseString(self,s):
+        half=len(s)//2
+        for i in range(0,half):
+            s[i],s[len(s)-1-i]=s[len(s)-1-i],s[i]
         return s
 
-    #more efficent
-    def reverseString1(self, s):
-        """
-        :type s: List[str]
-        :rtype: None Do not return anything, modify s in-place instead.
-        """
-        z=''
-        j=len(s)
-        for i in range(0,len(s)):
-            if not(j<=i):
-                z=s[i]
-                s[i]=s[j-1]
-                s[j-1]=z
-                j=len(s)-(i+1)
-        return s
+
+"""
+Runtime: 240 ms, faster than 5.77% of Python3 online submissions for Best Time to reverseString.
+Memory Usage: 17.3 MB, less than 98.84% of Python3 online submissions for Best Time to reverseString.
+"""
