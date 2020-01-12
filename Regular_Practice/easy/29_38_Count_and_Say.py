@@ -29,46 +29,32 @@ Explanation: For n = 3 the term was "21" in which we have two groups "2" and "1"
 """
 
 class Solution:
+    def __init__(self):
+        self.saydct={}
     def countAndSay(self, n: int) -> str:
         if n==1:
             return str(1)
-        elif n==2:
-            return str(11)
         else:
-            x=self.countAndSay(n-1)
-            count=0
-            y=0
-            res=''
-            say=None
-            for i in range(1,len(str(x))):
-                if str(x)[y]==str(x)[i]:
-                    #print('check1')
-                    count+=1
-                    say=str(x)[i]
-                    y=i
-                elif say:
-                    #print('check2')
-                    count+=1
-                    res=res+str(count)
-                    res=res+say
-                    say=None
-                    count=0
-                    y=i
-                else:
-                    #print('check3')
-                    count+=1
-                    res=res+str(count)
-                    res=res+str(x)[y]
-                    y=i
-                    count=0
-            #print('check4')
-            count+=1
-            say=str(x)[len(str(x))-1]
-            res=res+str(count)
-            res=res+say
-            return res
+            if n in self.saydct.keys():
+                return self.saydct[n]
+            else:
+                preval=self.countAndSay(n-1)
+                count,next_say=1,[]
+                for prev,curr in zip(preval[:-1],preval[1:]): #Great idea for comparing adjust values upto n-1 value
+                    if prev==curr:
+                        count+=1
+                    else:
+                        next_say.append(str(count)+prev)
+                        count=1
+                next_say.append(str(count)+preval[-1])
+                self.saydct[n]=''.join(next_say)
+            return self.saydct[n]
 
 """
+SecondCommit: DP with recursive function. Much simple and powerful solution for this problem.
+Runtime: 28 ms, faster than 91.63% of Python3 online submissions for Count and Say.
+Memory Usage: 12.9 MB, less than 100.00% of Python3 online submissions for Count and Say.
+
 FirstCommit: 
 Runtime: 36 ms, faster than 36.28% of Python3 online submissions for Count and Say.
 Memory Usage: 12.8 MB, less than 100.00% of Python3 online submissions for Count and Say.
