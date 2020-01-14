@@ -22,17 +22,18 @@ Could you do it without using any loop / recursion?
 
 class Solution:
     def isPowerOfThree(self, n: int) -> bool:
-        if n==0:
-            return False
-        while n!=1:
-            res=int(n%3)
-            if res!=0:
-                return False
+        curr=1
+        while curr<=n:
+            if curr==n:
+                return True
             else:
-                n=int(n/3)
-        return True
+                curr*=3 #Instead of divison.. Multiple the pow and compare it
+        return False
 
 """
+SecondCommit:
+Runtime: 88 ms, faster than 29.92% of Python3 online submissions for Power of Three.
+Memory Usage: 12.8 MB, less than 100.00% of Python3 online submissions for Power of Three.
 FirstCommit: 
 Runtime: 96 ms, faster than 17.32% of Python3 online submissions for Power of Three.
 Memory Usage: 12.8 MB, less than 100.00% of Python3 online submissions for Power of Three.
